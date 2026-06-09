@@ -2,8 +2,13 @@ import { notFound } from "next/navigation";
 import { AppShell } from "@/components/app-shell";
 import { KeyMomentReviewPanel } from "@/components/key-moment-review-panel";
 import { WeaknessCards } from "@/components/weakness-cards";
+import { mockGames } from "@/data/mock-data";
 import { analyzeGameLocally } from "@/lib/analysis";
 import { db } from "@/lib/repository";
+
+export function generateStaticParams() {
+  return mockGames.map((game) => ({ id: game.id }));
+}
 
 export default async function GameReviewPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
